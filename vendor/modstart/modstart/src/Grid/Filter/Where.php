@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Grid\Filter; class Where extends AbstractFilter { protected $where; public $input; public function __construct(\Closure $lvLqX, $sGkLi) { goto tLhrA; U0qmL: $this->id = $this->formatId($this->column); goto tpLPE; tLhrA: $this->where = $lvLqX; goto j_viI; bCYco: $this->column = static::getQueryHash($lvLqX, $this->label); goto U0qmL; tpLPE: $this->setupField(); goto kFAGM; j_viI: $this->label = $this->formatLabel($sGkLi); goto bCYco; kFAGM: } public static function getQueryHash(\Closure $QzRp6, $sGkLi = '') { $pWML5 = new \ReflectionFunction($QzRp6); return md5($pWML5->getFileName() . $pWML5->getStartLine() . $pWML5->getEndLine() . $sGkLi); } public function condition($uSzfg) { goto VOSQm; NB2Fl: if (is_array($R7kqa)) { $R7kqa = array_filter($R7kqa); } goto Ma5DG; Ma5DG: if (is_null($R7kqa) || empty($R7kqa)) { return; } goto Qqv3Y; VOSQm: $R7kqa = array_get($uSzfg, static::getQueryHash($this->where, $this->label)); goto NB2Fl; irKp1: return $this->buildCondition($this->where->bindTo($this)); goto ik0Qb; Qqv3Y: $this->input = $this->value = $R7kqa; goto irKp1; ik0Qb: } }

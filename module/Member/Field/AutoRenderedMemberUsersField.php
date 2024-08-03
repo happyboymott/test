@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Field; use ModStart\Core\Assets\AssetsUtil; use ModStart\Core\Util\ArrayUtil; use ModStart\Field\AutoRenderedFieldValue; use ModStart\Field\Type\FieldRenderMode; use Module\Member\Util\MemberUtil; class AutoRenderedMemberUsersField { public static function make($tie5k, $xXY5G) { switch ($tie5k) { case FieldRenderMode::GRID: case FieldRenderMode::DETAIL: $AP7MV = array_map(function ($LKQ89) { return '<span class="ub-tag sm">' . htmlspecialchars($LKQ89) . '</span>'; }, MemberUtil::listViewName($xXY5G['memberUserIds'])); return AutoRenderedFieldValue::make(join(' ', $AP7MV)); case FieldRenderMode::FORM: goto rWoDW; rWoDW: $zES5H = MemberUtil::listUsers($xXY5G['memberUserIds']); goto QjPIG; QjPIG: $MUdNs = ArrayUtil::flatItemsByKey($zES5H, 'id'); goto ucNMw; ucNMw: $zES5H = array_map(function ($LKQ89) { return array('value' => intval($LKQ89['id']), 'name' => MemberUtil::viewName($LKQ89), 'avatar' => AssetsUtil::fixOrDefault($LKQ89['avatar'], 'asset/image/avatar.svg')); }, $zES5H); goto HCpoe; HCpoe: return AutoRenderedFieldValue::makeView('module::Member.View.field.memberUsers', array('memberUserIds' => $MUdNs, 'memberUsers' => $zES5H, 'param' => $xXY5G)); goto M5HmM; M5HmM: } } }

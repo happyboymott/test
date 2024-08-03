@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Field; use ModStart\Core\Dao\ModelUtil; class Display extends AbstractField { protected $addable = false; protected $editable = false; public function content($FQQRK) { goto A1l4I; AUKFy: $this->addable(true); goto Ek1tL; Ek1tL: return $this; goto MKnqg; A1l4I: $this->hookRendering(function (AbstractField $Nmpi_, $jZEPM, $EXbah) use($FQQRK) { return AutoRenderedFieldValue::make($FQQRK); }); goto AUKFy; MKnqg: } public function asLink($iIdZH = null, $xwIgZ = true) { $this->hookRendering(function (AbstractField $Nmpi_, $jZEPM, $EXbah) use($iIdZH, $xwIgZ) { if (null !== $iIdZH) { goto bBbLF; bBbLF: $xju0Z = $iIdZH; goto EG03C; ifwlE: $N69gU = ModelUtil::traverse($jZEPM, $Nmpi_->column()); goto lG6iR; EG03C: if (preg_match_all('/\\{(.+?)\\}/', $xju0Z, $jWWnc)) { foreach ($jWWnc[1] as $rayXg => $QSYJT) { $repda = ModelUtil::traverse($jZEPM, $QSYJT); $xju0Z = str_replace($jWWnc[0][$rayXg], $repda, $xju0Z); } } goto ifwlE; lG6iR: } else { $xju0Z = ModelUtil::traverse($jZEPM, $Nmpi_->column()); $N69gU = $xju0Z; } if (!empty($N69gU)) { $wU9fq = array('<a href="', $xju0Z, '" target="_blank" ref="noreferrer noopener" ', $xwIgZ ? 'target="_blank"' : '', '>', $xwIgZ ? '<i class="iconfont icon-link"></i> ' : '', htmlspecialchars($N69gU), '</a>'); } else { $wU9fq = array(); } return AutoRenderedFieldValue::make(join('', $wU9fq)); }); return $this; } }

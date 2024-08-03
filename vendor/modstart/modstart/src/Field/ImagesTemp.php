@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Field; use ModStart\Core\Input\Response; use ModStart\Core\Util\ConvertUtil; use ModStart\Core\Util\SerializeUtil; use ModStart\Data\DataManager; class ImagesTemp extends AbstractField { protected $width = 80; protected static $js = array('asset/common/uploadButton.js'); protected function setup() { $this->addVariables(array('server' => modstart_admin_url('data/file_manager/image'))); } public function server($bu3wb) { $this->addVariables(array('server' => $bu3wb)); return $this; } public function unserializeValue($R7kqa, AbstractField $Nmpi_) { if (null === $R7kqa) { return $R7kqa; } return ConvertUtil::toArray($R7kqa); } public function serializeValue($R7kqa, $p6TQ_) { return SerializeUtil::jsonEncode($R7kqa); } public function prepareInput($R7kqa, $p6TQ_) { goto SoYo5; SoYo5: $R7kqa = ConvertUtil::toArray($R7kqa); goto A7rFo; BEpin: return $R7kqa; goto zWS4F; A7rFo: if (is_array($R7kqa)) { foreach ($R7kqa as $QSYJT => $repda) { if (DataManager::isDataTemp($repda)) { goto h3R6W; RXKxC: $R7kqa[$QSYJT] = DataManager::fix($IPT4J['data']['path']); goto fJn7k; h3R6W: $IPT4J = DataManager::storeTempDataByPath($repda); goto QSWQK; QSWQK: if (Response::isError($IPT4J)) { continue; } goto RXKxC; fJn7k: } } } goto BEpin; zWS4F: } }

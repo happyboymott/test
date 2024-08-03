@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Email; use Illuminate\Support\Facades\View; use ModStart\Core\Exception\BizException; use ModStart\Core\Input\Response; abstract class AbstractEmailSender { protected abstract function sendExecute($WSQnf, $WVdy7, $ho8_0, $ZtuBh, $xXY5G = array()); public function send($WSQnf, $ho8_0, $dWTBG, $AiU0S = array(), $WVdy7 = null, $xXY5G = array(), $dM_vx = null) { goto uyqP6; BA666: $ZtuBh = View::make($CKKqq, $AiU0S)->render(); goto k21Gu; uyqP6: $CKKqq = $dWTBG; goto Bf7Nh; k21Gu: try { goto rxhYm; qavgb: return Response::generateSuccess(); goto kDzkB; rxhYm: $W9vZV = $this->sendExecute($WSQnf, $WVdy7, $ho8_0, $ZtuBh, $xXY5G); goto Kg7bT; Kg7bT: BizException::throwsIfResponseError($W9vZV); goto qavgb; kDzkB: } catch (BizException $XeVO7) { return Response::generateError($XeVO7->getMessage()); } goto RQ0jT; PJNhp: if (!view()->exists($CKKqq)) { throw new \Exception('mail view not found : ' . $CKKqq); } goto BSXdU; BSXdU: if (null === $WVdy7) { $WVdy7 = $WSQnf; } goto BA666; Bf7Nh: if (!view()->exists($CKKqq)) { $CKKqq = 'theme.' . modstart_config()->getWithEnv('siteTemplate', 'default') . '.mail.' . $dWTBG; if (!view()->exists($CKKqq)) { $CKKqq = 'theme.default.mail.' . $dWTBG; if (!view()->exists($CKKqq)) { if ($dM_vx) { $CKKqq = 'module::' . $dM_vx . '.View.mail.' . $dWTBG; } if (!view()->exists($CKKqq)) { $CKKqq = 'module::Vendor.View.mail.' . $dWTBG; } } } } goto PJNhp; RQ0jT: } }

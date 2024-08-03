@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Job; use ModStart\Core\Exception\BizException; use ModStart\Core\Job\BaseJob; use Module\Vendor\Log\Logger; use Module\Vendor\Provider\SmsSender\SmsSenderProvider; class SmsSendJob extends BaseJob { public $phone; public $template; public $templateData; public static function create($jYinK, $dWTBG, $AiU0S) { goto Fi2P1; LWBQj: $rnvcV->templateData = $AiU0S; goto ZiaAz; Yl1Nq: $rnvcV->phone = $jYinK; goto OAri3; ZiaAz: app('Illuminate\\Contracts\\Bus\\Dispatcher')->dispatch($rnvcV); goto tixrH; OAri3: $rnvcV->template = $dWTBG; goto LWBQj; Fi2P1: $rnvcV = new static(); goto Yl1Nq; tixrH: } public function handle() { goto v0eKD; GTYVb: try { goto XbMOM; rVbYa: BizException::throwsIfResponseError($W9vZV); goto o5MNF; XbMOM: BizException::throwsIfEmpty('短信发送未设置', $CjF8A); goto IBZqn; o5MNF: Logger::info('Sms', 'End', $this->phone . ' - ' . json_encode($W9vZV, JSON_UNESCAPED_UNICODE)); goto E2jPi; IBZqn: $W9vZV = SmsSenderProvider::get($CjF8A)->send($this->phone, $this->template, $this->templateData); goto rVbYa; E2jPi: } catch (BizException $XeVO7) { Logger::error('Sms', 'Error', $this->phone . ' - ' . $XeVO7->getMessage()); } goto kQhf3; c6rDv: Logger::info('Sms', 'Start', $EhcEG); goto lW8UJ; lW8UJ: $CjF8A = app()->config->get('SmsSenderProvider'); goto GTYVb; v0eKD: $EhcEG = $this->phone . ' - ' . $this->template . ' - ' . json_encode($this->templateData, JSON_UNESCAPED_UNICODE); goto c6rDv; kQhf3: } }

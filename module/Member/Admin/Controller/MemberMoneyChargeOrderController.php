@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Admin\Concern\HasAdminQuickCRUD; use ModStart\Admin\Layout\AdminCRUDBuilder; use ModStart\Core\Type\TypeUtil; use ModStart\Field\AbstractField; use ModStart\Grid\GridFilter; use ModStart\Support\Concern\HasFields; use Module\Member\Util\MemberCmsUtil; use Module\Vendor\Type\OrderStatus; class MemberMoneyChargeOrderController extends Controller { use HasAdminQuickCRUD; protected function crud(AdminCRUDBuilder $UXxZR) { $UXxZR->init('member_money_charge_order')->field(function ($UXxZR) { $UXxZR->display('id', '业务订单ID'); $UXxZR->datetime('created_at', '创建时间'); $UXxZR->display('memberUserId', '用户')->hookRendering(function (AbstractField $JsHEv, $LKQ89, $F_9c4) { return MemberCmsUtil::showFromId($LKQ89->memberUserId); }); $UXxZR->display('money', '支付金额'); $UXxZR->type('status', '状态')->type(OrderStatus::class); })->gridFilter(function (GridFilter $UGzyw) { $UGzyw->eq('id', '业务订单ID'); $UGzyw->eq('memberUserId', '用户ID'); $UGzyw->eq('status', '状态')->select(array(OrderStatus::WAIT_PAY => TypeUtil::name(OrderStatus::class, OrderStatus::WAIT_PAY), OrderStatus::COMPLETED => TypeUtil::name(OrderStatus::class, OrderStatus::COMPLETED))); })->disableCUD()->canShow(false)->title('用户-钱包充值订单'); } }

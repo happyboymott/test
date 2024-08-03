@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Grid\Filter; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Type\BaseType; class Has extends AbstractFilter { protected $query = 'whereIn'; public function condition($Wun7g) { if (isset($Wun7g['has']) && is_array($Wun7g['has'])) { return $this->buildCondition($this->column, $Wun7g['has']); } return null; } public function checkbox($UvCfk) { goto GRkD7; nTOnN: $this->field->options($UvCfk); goto dHhgh; GRkD7: $this->field = new Field\Checkbox($this); goto nTOnN; dHhgh: return $this; goto ckygK; ckygK: } public function cascader($UvCfk) { goto bKfXu; xt0w2: return $this; goto xwQSL; RXABq: $this->field->nodes($UvCfk); goto xt0w2; bKfXu: $this->field = new Field\Cascader($this); goto RXABq; xwQSL: } public function cascaderModel($a5ocU, $zxYjR = 'id', $RfOJR = 'pid', $wXR9G = 'title', $YcoOA = 'sort') { goto uZp40; uZp40: $Q0PZT = array(); goto m9Cns; gAuf1: return $this->cascader($Q0PZT); goto JAlmV; m9Cns: foreach (ModelUtil::all($a5ocU, array(), array($zxYjR, $RfOJR, $wXR9G, $YcoOA), array($YcoOA, 'asc')) as $jZEPM) { $Q0PZT[] = array('id' => $jZEPM[$zxYjR], 'title' => $jZEPM[$wXR9G], 'pid' => $jZEPM[$RfOJR], 'sort' => $jZEPM[$YcoOA]); } goto gAuf1; JAlmV: } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Command; use Illuminate\Console\Command; use Illuminate\Support\Facades\Event; use ModStart\Core\Events\ModuleDisabledEvent; use ModStart\Core\Exception\BizException; use ModStart\ModStart; use ModStart\Module\ModuleManager; class ModuleDisableCommand extends Command { protected $signature = 'modstart:module-disable {module}'; public function handle() { goto nn3I1; LwOrK: $TJyaJ = ModuleManager::listAllInstalledModules(); goto XeoXx; nTzxG: $this->info('Module Disable Success'); goto MkK1D; XeoXx: $k3vtu = ModuleManager::getModuleBasic($ig6Rp); goto UVrdY; EoWW0: ModStart::clearCache(); goto iKnyL; nn3I1: $ig6Rp = $this->argument('module'); goto r6BtN; iKnyL: $Kl0Kj = new ModuleDisabledEvent(); goto IR0vj; IttTz: $TJyaJ[$ig6Rp]['enable'] = false; goto dRXGP; dRXGP: ModuleManager::saveUserInstalledModules($TJyaJ); goto EoWW0; r6BtN: BizException::throwsIf(L('Module Invalid'), !ModuleManager::isExists($ig6Rp)); goto LwOrK; B4JRa: ModuleManager::callHook($ig6Rp, 'hookBeforeDisable'); goto IttTz; IR0vj: $Kl0Kj->name = $ig6Rp; goto VLje9; UVrdY: BizException::throwsIf('Module basic empty', !$k3vtu); goto B4JRa; VLje9: if (PHP_VERSION_ID >= 80000) { Event::dispatch($Kl0Kj); } else { Event::fire($Kl0Kj); } goto nTzxG; MkK1D: } }

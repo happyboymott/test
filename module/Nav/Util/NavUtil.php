@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Nav\Util; use Illuminate\Support\Facades\Cache; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Util\TreeUtil; use Module\Nav\Type\NavPosition; class NavUtil { const CACHE_KEY_PREFIX = 'nav:'; public static function add($BNQpK, $MXTsP, $FLiYW) { $YbCuD = intval(ModelUtil::max('nav', 'sort')) + 1; ModelUtil::insert('nav', array('position' => $BNQpK, 'name' => $MXTsP, 'link' => $FLiYW, 'sort' => $YbCuD)); } public static function tree() { $OqQ02 = TreeUtil::modelToTree('nav', array('position' => 'position', 'name' => 'name', 'openType' => 'openType', 'link' => 'link', 'icon' => 'icon'), 'id', 'pid', 'sort', array('enable' => true)); return $OqQ02; } public static function listByPosition($BNQpK = 'header') { $OqQ02 = self::tree(); return array_filter($OqQ02, function ($LKQ89) use($BNQpK) { return $LKQ89['position'] == $BNQpK; }); } public static function listByPositionWithCache($BNQpK = 'header', $uCU0s = 600) { return Cache::remember(self::CACHE_KEY_PREFIX . $BNQpK, $uCU0s, function () use($BNQpK) { return self::listByPosition($BNQpK); }); } public static function hasData($BNQpK = 'header') { $ZlKzu = self::listByPositionWithCache($BNQpK); return !empty($ZlKzu); } public static function clearCache() { foreach (NavPosition::getList() as $PPiLF => $RAErU) { Cache::forget(self::CACHE_KEY_PREFIX . $PPiLF); } } }

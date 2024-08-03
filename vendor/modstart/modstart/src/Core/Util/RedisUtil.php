@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; use Illuminate\Support\Facades\Redis; class RedisUtil { public static function isEnable() { return !!config('env.REDIS_HOST'); } public static function client() { goto CZIBn; I2Kqc: return $c0q2c; goto nsBQV; YBi02: if (null === $c0q2c) { $c0q2c = Redis::connection('default'); } goto I2Kqc; CZIBn: static $c0q2c = null; goto YBi02; nsBQV: } public static function get($QmpAx) { $R7kqa = self::client()->get($QmpAx); return $R7kqa; } public static function getObject($QmpAx) { $R7kqa = self::client()->get($QmpAx); return @json_decode($R7kqa, true); } public static function set($QmpAx, $R7kqa) { self::client()->set($QmpAx, $R7kqa); } public static function setnx($QmpAx, $R7kqa) { return self::client()->setnx($QmpAx, $R7kqa); } public static function setex($QmpAx, $R7kqa, $sp8UP) { self::client()->setex($QmpAx, $sp8UP, $R7kqa); } public static function setexObject($QmpAx, $R7kqa, $sp8UP) { self::client()->setex($QmpAx, $sp8UP, SerializeUtil::jsonEncode($R7kqa)); } public static function delete($QmpAx) { self::client()->del(array($QmpAx)); } public static function incr($QmpAx) { self::client()->incr($QmpAx); } public static function decr($QmpAx) { return self::client()->decr($QmpAx); } public static function expire($QmpAx, $j7Kea) { self::client()->expire($QmpAx, $j7Kea); } }

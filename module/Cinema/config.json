@@ -1,0 +1,31 @@
+{
+    "name": "Cinema",
+    "title": "在线影视",
+    "env": [
+        "laravel5",
+        "laravel9"
+    ],
+    "types": [
+        "PC",
+        "Mobile",
+        "Admin"
+    ],
+    "tags": [
+        "在线影视",
+        "视频播放"
+    ],
+    "require": [
+        "Vendor:>=3.5.0",
+        "Nav",
+        "Banner"
+    ],
+    "suggest": [],
+    "version": "1.1.0",
+    "modstartVersion": ">=3.6.0",
+    "author": "ModStart",
+    "description": "提供电影、电视剧、剧集等在线观看系统",
+    "providers": [
+    ],
+    "config": {
+    }
+}

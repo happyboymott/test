@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\App\OpenApi\Util; use ModStart\Core\Input\Response; use ModStart\Core\Util\CurlUtil; use ModStart\Core\Util\SerializeUtil; use ModStart\Core\Util\SignUtil; class ModStartOpenApi { private $apiBase; private $key; private $secret; public static function create($j3lEU, $QmpAx = null, $YahJU = null) { $HEPEg = new ModStartOpenApi(); return $HEPEg->setApiBase($j3lEU)->setKey($QmpAx)->setSecret($YahJU); } public function setApiBase($j3lEU) { $this->apiBase = $j3lEU; return $this; } public function setKey($QmpAx) { $this->key = $QmpAx; return $this; } public function setSecret($YahJU) { $this->secret = $YahJU; return $this; } public function post($a963s, $fb7yT) { goto h3i9y; h3i9y: $b4Sjf = array(); goto N0Aso; N0Aso: $b4Sjf['key'] = $this->key; goto cQcyo; cQcyo: $b4Sjf['timestamp'] = time(); goto RiCTq; M0O_B: $IPT4J = CurlUtil::postJSON($this->apiBase . $a963s, SerializeUtil::jsonEncode(array_merge($b4Sjf, $fb7yT)), array('header' => array('Content-Type' => 'application/json', 'Accept' => 'application/json'))); goto pEzgG; RiCTq: $b4Sjf['sign'] = SignUtil::common($b4Sjf, $this->secret); goto M0O_B; uy559: return $IPT4J['data']; goto sXSA8; pEzgG: if (Response::isError($IPT4J)) { return Response::generateError($IPT4J['msg']); } goto uy559; sXSA8: } }

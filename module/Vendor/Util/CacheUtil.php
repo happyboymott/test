@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Util; use Illuminate\Support\Facades\Cache; class CacheUtil { private static function client() { return Cache::store(); } public static function rememberForever($Tf8Ew, $Ri3Vj) { return self::client()->rememberForever($Tf8Ew, $Ri3Vj); } public static function remember($Tf8Ew, $gJWst, $Ri3Vj) { return self::client()->remember($Tf8Ew, intval($gJWst / 60), $Ri3Vj); } public static function forget($Tf8Ew) { return self::client()->forget($Tf8Ew); } public static function get($Tf8Ew) { return self::client()->get($Tf8Ew); } public static function put($Tf8Ew, $v0Qpl, $gJWst) { self::client()->put($Tf8Ew, $v0Qpl, ceil($gJWst / 60)); } public static function forever($Tf8Ew, $v0Qpl) { self::client()->forever($Tf8Ew, $v0Qpl); } public static function executeInterval($Tf8Ew, $Ri3Vj, $uCU0s = 5) { goto clzEC; oecKe: if ($VGIcy <= 0 || $VGIcy < time()) { self::put($VIedZ, time() + $uCU0s * 60, $uCU0s * 60); call_user_func($Ri3Vj); } goto lmXX7; g3NDL: $VGIcy = intval(self::get($VIedZ)); goto oecKe; clzEC: $VIedZ = 'Vendor:CacheInterval:' . $Tf8Ew; goto g3NDL; lmXX7: } }

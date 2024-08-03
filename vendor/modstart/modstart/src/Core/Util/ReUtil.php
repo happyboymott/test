@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; class ReUtil { public static function group($w8BNT, $LtSsh, $nUST1) { try { if (preg_match($w8BNT, $LtSsh, $jWWnc)) { return $jWWnc[$nUST1]; } } catch (\Exception $PJAcb) { } return null; } public static function group0($w8BNT, $LtSsh) { try { return self::group($w8BNT, $LtSsh, 0); } catch (\Exception $PJAcb) { } return null; } public static function group1($w8BNT, $LtSsh) { try { return self::group($w8BNT, $LtSsh, 1); } catch (\Exception $PJAcb) { } return null; } public static function isWildMatch($srKww, $LtSsh) { goto FxW2d; fbrB7: return preg_match($w8BNT, $LtSsh); goto JiHlg; nFBgA: $w8BNT = '/^' . preg_quote($srKww, '/') . '$/'; goto zatFq; zatFq: $w8BNT = str_replace('__x__star__', '.*', $w8BNT); goto fbrB7; FxW2d: $srKww = str_replace('*', '__x__star__', $srKww); goto nFBgA; JiHlg: } public static function replace($FQQRK, $w8BNT, $HqZca) { goto JSa8T; zWpVT: foreach ($jWWnc[0] as $rayXg => $repda) { goto IaQ8N; ZhIrz: $wrZSR = call_user_func_array($HqZca, array($pN4s5)); goto TDxyk; IaQ8N: $pN4s5 = array_map(function ($TtD6i) use($rayXg, $jWWnc) { return $TtD6i[$rayXg]; }, $jWWnc); goto ZhIrz; TDxyk: $FQQRK = str_replace($repda, $wrZSR, $FQQRK); goto fKiio; fKiio: } goto KyL5z; KyL5z: return $FQQRK; goto ed13q; JSa8T: preg_match_all($w8BNT, $FQQRK, $jWWnc); goto zWpVT; ed13q: } }

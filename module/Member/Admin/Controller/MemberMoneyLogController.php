@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Admin\Concern\HasAdminQuickCRUD; use ModStart\Admin\Layout\AdminCRUDBuilder; use ModStart\Field\AbstractField; use ModStart\Field\AutoRenderedFieldValue; use ModStart\Grid\GridFilter; use ModStart\Support\Concern\HasFields; use Module\Member\Util\MemberCmsUtil; class MemberMoneyLogController extends Controller { use HasAdminQuickCRUD; protected function crud(AdminCRUDBuilder $UXxZR) { $UXxZR->init('member_money_log')->field(function ($UXxZR) { $UXxZR->id('id', 'ID'); $UXxZR->display('memberUserId', '用户')->hookRendering(function (AbstractField $JsHEv, $LKQ89, $F_9c4) { return MemberCmsUtil::showFromId($LKQ89->memberUserId); }); $UXxZR->display('change', '金额')->hookRendering(function (AbstractField $JsHEv, $LKQ89, $F_9c4) { return AutoRenderedFieldValue::make($LKQ89->change > 0 ? '<span class="ub-text-success">+' . $LKQ89->change . '</span>' : '<span class="ub-text-danger">' . $LKQ89->change . '</span>'); }); $UXxZR->text('remark', '备注'); $UXxZR->display('created_at', L('Created At')); })->gridFilter(function (GridFilter $UGzyw) { $UGzyw->eq('memberUserId', '用户ID'); $UGzyw->range('created_at', '创建时间'); })->title('用户钱包流水')->canAdd(false)->canEdit(false)->canDelete(false); } }

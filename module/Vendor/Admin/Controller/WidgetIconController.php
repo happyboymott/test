@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Core\Input\Response; class WidgetIconController extends Controller { public static $PermitMethodMap = array('*' => '*'); public function index() { goto v_LBy; jSCUg: if (file_exists($GmsVq = public_path('asset/vendor/iconfont/iconfont.css')) && ($ZtuBh = file_get_contents($GmsVq))) { preg_match_all('/\\.icon-([a-z0-9\\-]+):before/', $ZtuBh, $Qt9DM); $uZ7AE = array_map(function ($A8WB0) { return array('title' => $A8WB0, 'cls' => "iconfont icon-{$A8WB0}"); }, $Qt9DM[1]); } goto XOgwK; Co5Wl: if (file_exists($GmsVq = public_path('asset/font-awesome/css/font-awesome.min.css')) && ($ZtuBh = file_get_contents($GmsVq))) { preg_match_all('/\\.fa-([a-z0-9\\-]+):before/', $ZtuBh, $Qt9DM); $uZ7AE = array_map(function ($A8WB0) { return array('title' => $A8WB0, 'cls' => "fa fa-{$A8WB0}"); }, $Qt9DM[1]); } goto PrdjN; xNh6o: $uZ7AE = array(); goto jSCUg; XOgwK: $z1Wco[] = array('title' => '内置图标', 'list' => $uZ7AE); goto w2EqL; v_LBy: $z1Wco = array(); goto xNh6o; A5MUm: return Response::jsonSuccessData($z1Wco); goto cujVd; w2EqL: $uZ7AE = array(); goto Co5Wl; PrdjN: $z1Wco[] = array('title' => 'Font Awesome', 'list' => $uZ7AE); goto A5MUm; cujVd: } }

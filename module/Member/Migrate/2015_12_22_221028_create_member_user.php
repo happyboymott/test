@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ use Illuminate\Database\Schema\Blueprint; use Illuminate\Database\Migrations\Migration; class CreateMemberUser extends Migration { public function up() { Schema::create('member_user', function (Blueprint $jzg7M) { $jzg7M->increments('id'); $jzg7M->timestamps(); $jzg7M->string('username', 50)->nullable()->comment('用户名'); $jzg7M->string('phone', 20)->nullable()->comment('手机'); $jzg7M->string('email', 200)->nullable()->comment('邮箱')->charset('utf8'); $jzg7M->char('password', 32)->nullable()->comment('密码'); $jzg7M->char('passwordSalt', 16)->nullable()->comment('密码Salt'); $jzg7M->timestamp('lastLoginTime')->nullable()->comment('上次登录时间'); $jzg7M->string('lastLoginIp', 20)->nullable()->comment('上次登录Ip'); $jzg7M->boolean('phoneVerified')->nullable()->comment('手机已验证'); $jzg7M->boolean('emailVerified')->nullable()->comment('邮箱已验证'); $jzg7M->string('avatar', 100)->nullable()->comment('头像(小)'); $jzg7M->string('avatarMedium', 100)->nullable()->comment('头像(中)'); $jzg7M->string('avatarBig', 100)->nullable()->comment('头像(大)'); $jzg7M->tinyInteger('gender')->nullable()->comment('性别'); $jzg7M->string('realname', 20)->nullable()->comment('真实姓名'); $jzg7M->string('signature', 200)->nullable()->comment('个性签名'); $jzg7M->index('username'); $jzg7M->index('phone'); $jzg7M->index('email'); }); } public function down() { } }

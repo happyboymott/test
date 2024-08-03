@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Provider\VideoStream; use ModStart\Field\AbstractField; use ModStart\Support\Manager\FieldManager; class VideoStreamField extends AbstractField { const SCOPE_ADMIN = 'admin'; const SCOPE_MEMBER = 'member'; protected $view = 'module::Vendor.View.field.videoStream'; protected $value = array('driver' => null, 'name' => null, 'path' => null); protected function setup() { parent::setup(); $this->addVariables(array('scope' => self::SCOPE_ADMIN)); } public function scope($odM6i = null) { goto ImzEa; YEkLW: return $this; goto eQBG6; WAMr1: $this->addVariables(array('scope' => $odM6i)); goto YEkLW; ImzEa: if (null == $odM6i) { return $this->getVariable('scope'); } goto WAMr1; eQBG6: } public function unserializeValue($v0Qpl, AbstractField $JsHEv) { goto YBh0X; vrVhO: if (empty($v0Qpl['driver'])) { $v0Qpl['driver'] = null; } goto wppPS; wppPS: if (empty($v0Qpl['name'])) { $v0Qpl['name'] = null; } goto z110l; z110l: if (empty($v0Qpl['path'])) { $v0Qpl['path'] = null; } goto I6Y64; I6Y64: return $v0Qpl; goto he0EG; YBh0X: $v0Qpl = json_decode($v0Qpl, true); goto vrVhO; he0EG: } public function serializeValue($v0Qpl, $SEdfV) { return json_encode($v0Qpl, JSON_UNESCAPED_UNICODE); } public function prepareInput($v0Qpl, $SEdfV) { return json_decode($v0Qpl, true); } public static function register() { FieldManager::extend('videoStream', VideoStreamField::class); } }

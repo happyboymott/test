@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\App\OpenApi; use Illuminate\Support\Facades\Cache; use Illuminate\Support\Facades\Route; use ModStart\Module\ModuleManager; class ModStartOpenApi { private static function listModuleRoutes() { goto Agi7M; Agi7M: $Nr8WY = ModuleManager::listAllInstalledModulesInRequiredOrder(true); goto yAZ3W; yAZ3W: $oehQn = array(); goto wfsFj; wfsFj: foreach ($Nr8WY as $ig6Rp) { if (file_exists($itoQ0 = ModuleManager::path($ig6Rp, 'OpenApi/routes.php'))) { $oehQn[$ig6Rp] = $itoQ0; } } goto pcbw8; pcbw8: return $oehQn; goto Mqn91; Mqn91: } public static function registerModuleRoutes() { goto As17L; R09EA: if (file_exists($EifDN = modstart_open_api_path('routes.php'))) { require $EifDN; } goto CUtoL; N3qM0: foreach ($NAKUU as $ig6Rp => $itoQ0) { Route::group(array('prefix' => config('modstart.openApi.prefix'), 'middleware' => array('openApi.bootstrap'), 'namespace' => "\\Module\\{$ig6Rp}\\OpenApi\\Controller"), function ($router) use($itoQ0) { if (file_exists($itoQ0)) { require $itoQ0; } }); } goto R09EA; As17L: if (config('env.APP_DEBUG')) { $NAKUU = self::listModuleRoutes(); } else { $NAKUU = Cache::rememberForever('ModStartOpenApiRoutes', function () { return self::listModuleRoutes(); }); } goto N3qM0; CUtoL: } }

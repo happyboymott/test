@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ use Illuminate\Database\Migrations\Migration; use Illuminate\Database\Schema\Blueprint; class CinemaShowCreate extends Migration { public function up() { Schema::create('cinema_show', function (Blueprint $jzg7M) { $jzg7M->increments('id'); $jzg7M->timestamps(); $jzg7M->integer('seriesId')->nullable()->comment(''); $jzg7M->integer('sort')->nullable()->comment(''); $jzg7M->string('title', 100)->nullable()->comment(''); $jzg7M->string('cover', 200)->nullable()->comment(''); $jzg7M->integer('viewCount')->nullable()->comment(''); $jzg7M->integer('commentCount')->nullable()->comment(''); $jzg7M->integer('favCount')->nullable()->comment(''); $jzg7M->tinyInteger('freeStatus')->nullable()->comment(''); $jzg7M->tinyInteger('vipStatus')->nullable()->comment(''); $jzg7M->string('vipIds', 50)->nullable()->comment(''); $jzg7M->tinyInteger('creditStatus')->nullable()->comment(''); $jzg7M->integer('creditCost')->nullable()->comment(''); $jzg7M->tinyInteger('videoType')->nullable()->comment(''); $jzg7M->string('videoPath', 200)->nullable()->comment(''); $jzg7M->string('videoCloud', 400)->nullable()->comment(''); $jzg7M->tinyInteger('tryVideoType')->nullable()->comment(''); $jzg7M->string('tryVideoPath', 200)->nullable()->comment(''); $jzg7M->string('tryVideoCloud', 400)->nullable()->comment(''); }); } public function down() { } }

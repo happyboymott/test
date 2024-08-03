@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\App\Web; use Illuminate\Support\Facades\Cache; use Illuminate\Support\Facades\Route; use ModStart\Module\ModuleManager; class ModStartWeb { private static function listModuleRoutes() { goto syDn0; L00Dm: $oehQn = array(); goto CYCTd; MbG6y: return $oehQn; goto sisXn; CYCTd: foreach ($Nr8WY as $ig6Rp) { if (file_exists($itoQ0 = ModuleManager::path($ig6Rp, 'Web/routes.php'))) { $oehQn[$ig6Rp] = $itoQ0; } } goto MbG6y; syDn0: $Nr8WY = ModuleManager::listAllInstalledModulesInRequiredOrder(true); goto L00Dm; sisXn: } public static function registerModuleRoutes() { goto rpCgV; WsTsM: foreach ($NAKUU as $ig6Rp => $itoQ0) { Route::group(array('prefix' => config('modstart.web.prefix'), 'middleware' => array('web.bootstrap'), 'namespace' => "\\Module\\{$ig6Rp}\\Web\\Controller"), function ($router) use($itoQ0) { if (file_exists($itoQ0)) { require $itoQ0; } }); } goto vJPz0; rpCgV: if (config('env.APP_DEBUG')) { $NAKUU = self::listModuleRoutes(); } else { $NAKUU = Cache::rememberForever('ModStartWebRoutes', function () { return self::listModuleRoutes(); }); } goto WsTsM; vJPz0: if (file_exists($EifDN = modstart_web_path('routes.php'))) { require $EifDN; } goto unwja; unwja: } }

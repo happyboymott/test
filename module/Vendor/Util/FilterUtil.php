@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Util; use ModStart\Core\Exception\BizException; use ModStart\Core\Util\TreeUtil; class FilterUtil { private static function categoryGet($dzMvs, $wlXEl) { foreach ($dzMvs as $JjTRL) { if ($JjTRL['id'] == $wlXEl) { return $JjTRL; } } return null; } public static function categoryTreeFilter($lHyKt, $dzMvs, $VaH1Q = 'title', $iwWHv = 'pid') { goto PVPzn; yGmZW: $YR3lq = TreeUtil::nodesChainWithItems($dzMvs, $lHyKt); goto TXPw0; WD8AA: $OIdNB = TreeUtil::nodesChildrenIds($dzMvs, $lHyKt); goto qxbwb; cB5HU: $pucrR = array($lHyKt); goto WD8AA; c4Nv4: $t6LjL = array(); goto ehbka; dq6cM: if ($lHyKt) { goto S_Ply; P2lRT: if ($JjTRL[$iwWHv]) { $cuzTP = self::categoryGet($dzMvs, $JjTRL[$iwWHv]); $t6LjL[] = $cuzTP[$VaH1Q]; } goto OuqL9; pvR1G: $A2r9g[] = $JjTRL[$VaH1Q]; goto wvP3x; wvP3x: $t6LjL[] = $JjTRL[$VaH1Q]; goto P2lRT; S_Ply: $JjTRL = self::categoryGet($dzMvs, $lHyKt); goto Hfo3H; Hfo3H: BizException::throwsIfEmpty('分类不存在', $JjTRL); goto pvR1G; OuqL9: } goto cB5HU; qxbwb: $pucrR = array_merge($pucrR, $OIdNB); goto yGmZW; TXPw0: return array($JjTRL, $pucrR, $YR3lq, $A2r9g, $t6LjL); goto GgWwd; PVPzn: $A2r9g = array(); goto c4Nv4; ehbka: $JjTRL = null; goto dq6cM; GgWwd: } }

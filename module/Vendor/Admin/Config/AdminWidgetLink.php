@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Admin\Config; class AdminWidgetLink { private static $list = array(); public static function register($L7yOl) { self::$list[] = $L7yOl; } public static function get() { goto WZ2hZ; vqwrw: $kbGpt = array(); goto Ljgxz; Ljgxz: foreach ($cwoqv as $PPiLF => $SNE7X) { if (isset($kbGpt[$SNE7X['title']])) { $kbGpt[$SNE7X['title']]['list'] = array_merge($kbGpt[$SNE7X['title']]['list'], $SNE7X['list']); } else { $kbGpt[$SNE7X['title']] = $SNE7X; } } goto hbL_e; hbL_e: return array_values($kbGpt); goto hBPyn; WZ2hZ: $cwoqv = array(); goto Gqu__; Gqu__: foreach (self::$list as $LKQ89) { if ($LKQ89 instanceof \Closure) { $vgAv2 = call_user_func($LKQ89); if (!empty($vgAv2)) { if (isset($vgAv2['title']) && isset($vgAv2['list'])) { $cwoqv[] = $vgAv2; } else { $cwoqv = array_merge($cwoqv, $vgAv2); } } } else { $cwoqv[] = $LKQ89; } } goto vqwrw; hBPyn: } public static function build($MyIra, $Vdoik) { if (empty($Vdoik)) { return null; } return array('title' => $MyIra, 'list' => array_filter(array_map(function ($LKQ89) { return $LKQ89 ? array('title' => $LKQ89[0], 'link' => $LKQ89[1]) : null; }, $Vdoik))); } }

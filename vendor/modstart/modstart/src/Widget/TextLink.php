@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Widget; use ModStart\ModStart; class TextLink extends AbstractWidget { public static function getAssets() { return array('style' => '.ub-text-link{display:inline-block;margin-right:0.5rem;}'); } public static function make(...$Rb1XH) { goto UkiIt; fUZ38: $Kwpw4->text($Rb1XH[1]); goto nsWSy; FSAqE: return $Kwpw4; goto sYE6z; UkiIt: $Kwpw4 = new static(); goto I3jBg; I3jBg: $Kwpw4->type($Rb1XH[0]); goto fUZ38; nsWSy: $Kwpw4->link($Rb1XH[2]); goto FSAqE; sYE6z: } public static function __callStatic($KtHB2, $Rb1XH) { goto JcBcY; JcBcY: $HrJQR = array('primary', 'muted', 'warning', 'danger', 'success'); goto GVUeT; GVUeT: if (in_array($KtHB2, $HrJQR)) { goto uZlqu; zyu7k: $Kwpw4->text($Rb1XH[0]); goto ooqFD; uZlqu: $Kwpw4 = new static(); goto iiZX0; Rk5t0: return $Kwpw4->render(); goto Nq59l; IBaID: $Kwpw4->attr(empty($Rb1XH[2]) ? '' : $Rb1XH[2]); goto Rk5t0; ooqFD: $Kwpw4->link($Rb1XH[1]); goto IBaID; iiZX0: $Kwpw4->type($KtHB2); goto zyu7k; Nq59l: } goto ZCuxH; ZCuxH: throw new \Exception('TextLink error ' . join(',', $HrJQR) . ' '); goto yRXwF; yRXwF: } public function render() { if ($this->disabled) { return '<a href="javascript:;" class="ub-text-link ub-text-muted">' . $this->text . '</a>'; } else { return '<a href="' . $this->link . '" class="ub-text-link ub-text-' . ($this->type == 'primary' ? 'link' : $this->type) . '" ' . $this->attr . '>' . $this->text . '</a>'; } } }

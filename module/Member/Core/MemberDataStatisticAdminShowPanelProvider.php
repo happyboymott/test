@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Core; use ModStart\Core\Util\FileUtil; use ModStart\Form\Form; use Module\Member\Model\MemberDataStatistic; use Module\Member\Provider\MemberAdminShowPanel\AbstractMemberAdminShowPanelProvider; class MemberDataStatisticAdminShowPanelProvider extends AbstractMemberAdminShowPanelProvider { const NAME = 'MemberDataStatistic'; public function name() { return self::NAME; } public function title() { return '存储'; } public function render($hz6q9, $xXY5G = array()) { goto mtyPM; OQYEe: $GtTXi->formUrl(modstart_admin_url('member/config/data_statistic')); goto rA8XV; bqHw9: $LKQ89['sizeLimit'] = $VeWu4['sizeLimit']; goto qJOau; rA8XV: return $GtTXi->render(); goto Znkcf; dU8lz: $LKQ89['memberUserId'] = $hz6q9['id']; goto bqHw9; IFcqQ: $GtTXi->display('sizeUsed', '已使用大小')->addable(true); goto KdyTL; qJOau: $LKQ89['sizeUsed'] = FileUtil::formatByte($VeWu4['sizeUsed']); goto yg4PM; Jdb2B: $LKQ89 = array(); goto dU8lz; nVDnF: $GtTXi->showReset(false); goto OQYEe; mmUxW: $GtTXi = Form::make(''); goto rwXna; rwXna: $GtTXi->number('sizeLimit', '大小限制')->help('单位MB'); goto IFcqQ; yg4PM: $GtTXi->item($LKQ89)->fillFields(); goto nVDnF; mtyPM: $VeWu4 = MemberDataStatistic::getCreateMemberUser($hz6q9['id']); goto mmUxW; KdyTL: $GtTXi->hidden('memberUserId', '用户ID')->addable(true); goto Jdb2B; Znkcf: } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Core\Input\InputPackage; use Illuminate\Support\Facades\Session; use ModStart\Admin\Layout\AdminPage; use ModStart\Core\Exception\BizException; use ModStart\Core\Input\Response; use ModStart\Form\Form; use ModStart\Widget\Box; class SecurityController extends Controller { public static $PermitMethodMap = array('*' => '*'); public function secondVerify(AdminPage $ngjDL) { goto M_JrN; S6E_r: $GtTXi->formClass('wide'); goto xFk20; O0u35: $GtTXi = Form::make(''); goto I19a6; H7RO0: $GtTXi->showReset(false); goto S6E_r; I19a6: $GtTXi->password('password', '安全验证密码'); goto H7RO0; M_JrN: $QBv2Z = InputPackage::buildFromInput(); goto hieBc; xFk20: return $ngjDL->pageTitle('二次安全验证')->body(Box::make($GtTXi, '二次安全验证'))->handleForm($GtTXi, function (Form $GtTXi) use($Gg7J2) { $IE3H4 = $GtTXi->dataForming(); $lx0hs = $IE3H4['password']; $T2jQR = modstart_config('Vendor_SecuritySecondVerifyPassword'); BizException::throwsIf('密码不正确', md5($lx0hs) != $T2jQR); Session::set('Vendor_SecuritySecondVerifyTime', time() + 3600); return Response::send(0, null, null, $Gg7J2); }); goto O4a1N; hieBc: $Gg7J2 = $QBv2Z->getTrimString('redirect', modstart_admin_url('')); goto O0u35; O4a1N: } }

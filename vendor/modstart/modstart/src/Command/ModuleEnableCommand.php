@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Command; use Illuminate\Console\Command; use Illuminate\Support\Facades\Event; use ModStart\Core\Events\ModuleEnabledEvent; use ModStart\Core\Exception\BizException; use ModStart\ModStart; use ModStart\Module\ModuleManager; class ModuleEnableCommand extends Command { protected $signature = 'modstart:module-enable {module}'; public function handle() { goto EvLQW; cXN_a: BizException::throwsIf('Module basic empty', !$k3vtu); goto WOSFs; W5FE4: if (PHP_VERSION_ID >= 80000) { Event::dispatch($Kl0Kj); } else { Event::fire($Kl0Kj); } goto B8_vN; OTLPH: $k3vtu = ModuleManager::getModuleBasic($ig6Rp); goto cXN_a; kZ8zG: ModStart::clearCache(); goto WP0Lu; VXAQF: ModuleManager::saveUserInstalledModules($TJyaJ); goto kZ8zG; PNH92: BizException::throwsIf(L('Module Invalid'), !ModuleManager::isExists($ig6Rp)); goto PocOm; WOSFs: $TJyaJ[$ig6Rp]['enable'] = true; goto VXAQF; B8_vN: $this->info('Module Enable Success'); goto OXc7x; WP0Lu: ModuleManager::callHook($ig6Rp, 'hookEnabled'); goto tocXQ; On3s7: $Kl0Kj->name = $ig6Rp; goto W5FE4; PocOm: $TJyaJ = ModuleManager::listAllInstalledModules(); goto OTLPH; EvLQW: $ig6Rp = $this->argument('module'); goto PNH92; tocXQ: $Kl0Kj = new ModuleEnabledEvent(); goto On3s7; OXc7x: } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Banner\Util; use Illuminate\Support\Facades\Cache; use ModStart\Core\Assets\AssetsUtil; use ModStart\Core\Dao\ModelUtil; use Module\Banner\Type\BannerPosition; class BannerUtil { const CACHE_KEY_PREFIX = 'banner:'; public static function listByPosition($BNQpK = 'home') { goto KmZ_4; plqn6: return $mvkYF; goto PT3I5; KmZ_4: $mvkYF = ModelUtil::model('banner')->where(array('position' => $BNQpK))->orderBy('sort', 'asc')->get()->toArray(); goto c3XhD; c3XhD: foreach ($mvkYF as $fEs5v => $SNE7X) { if ($SNE7X['image']) { $mvkYF[$fEs5v]['image'] = AssetsUtil::fixFull($SNE7X['image']); } if ($SNE7X['video']) { $mvkYF[$fEs5v]['video'] = AssetsUtil::fixFull($SNE7X['video']); } } goto plqn6; PT3I5: } public static function listByPositionWithCache($BNQpK = 'home', $uCU0s = 60) { return Cache::remember(self::CACHE_KEY_PREFIX . $BNQpK, $uCU0s, function () use($BNQpK) { return self::listByPosition($BNQpK); }); } public static function insertIfMissing($BNQpK, $IE3H4) { $IE3H4['position'] = $BNQpK; if (!ModelUtil::exists('banner', $IE3H4)) { ModelUtil::insert('banner', $IE3H4); } } public static function hasData($BNQpK = 'home') { return !empty(self::listByPositionWithCache($BNQpK)); } public static function clearCache() { foreach (BannerPosition::getList() as $PPiLF => $RAErU) { Cache::forget(self::CACHE_KEY_PREFIX . $PPiLF); } } }

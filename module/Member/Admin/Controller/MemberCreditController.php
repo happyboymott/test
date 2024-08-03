@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Admin\Auth\AdminPermission; use ModStart\Admin\Layout\AdminDialogPage; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Response; use ModStart\Core\Util\CRUDUtil; use ModStart\Form\Form; use Module\Member\Util\MemberCreditUtil; class MemberCreditController extends Controller { public static $PermitMethodMap = array('*' => '\\Module\\Member\\Admin\\Controller\\MemberController@index'); public function charge(AdminDialogPage $ngjDL) { goto jgVyN; Mu2g0: $GtTXi->showSubmit(false)->showReset(false); goto dBOjD; jgVyN: $mdCxN = InputPackage::buildFromInput()->getInteger('memberUserId'); goto GaK3E; aqwdX: $GtTXi->number('change', '积分变更')->help('负数表示减少')->required(); goto uYnQZ; dBOjD: return $ngjDL->pageTitle('积分变更')->body($GtTXi)->handleForm($GtTXi, function (Form $GtTXi) use($mdCxN) { AdminPermission::demoCheck(); $IE3H4 = $GtTXi->dataForming(); ModelUtil::transactionBegin(); MemberCreditUtil::change($mdCxN, $IE3H4['change'], $IE3H4['remark']); ModelUtil::transactionCommit(); return Response::redirect(CRUDUtil::jsDialogCloseAndParentRefresh()); }); goto bomwE; GaK3E: $GtTXi = Form::make(''); goto p4vZ1; uYnQZ: $GtTXi->text('remark', '说明')->defaultValue('系统变更')->required(); goto Mu2g0; p4vZ1: $GtTXi->display('_total', '总积分')->value(MemberCreditUtil::getTotal($mdCxN))->addable(true); goto aqwdX; bomwE: } }

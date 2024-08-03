@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Provider\SiteUrl; use ModStart\Core\Exception\BizException; class SiteUrlProvider { private static $list = array(); private static $init = false; public static function register($CjF8A) { self::$list[] = $CjF8A; } public static function get() { if (!self::$init) { self::$init = true; foreach (self::$list as $PPiLF => $SNE7X) { if (is_string($SNE7X)) { self::$list[$PPiLF] = app($SNE7X); } } } return self::$list; } public static function updateBiz($strQF, $wg3Zt, $A8WB0 = '', $xXY5G = array()) { goto hylnl; IzcJ5: foreach (self::get() as $TlCN9) { $TlCN9->update($wg3Zt, $A8WB0, $xXY5G); } goto men5b; hylnl: $xXY5G['biz'] = $strQF; goto J48UZ; J48UZ: BizException::throwsIfEmpty('SiteUrlProvider.Error -> url empty', $wg3Zt); goto IzcJ5; men5b: } public static function update($wg3Zt, $A8WB0 = '', $xXY5G = array()) { BizException::throwsIfEmpty('SiteUrlProvider.Error -> url empty', $wg3Zt); foreach (self::get() as $TlCN9) { $TlCN9->update($wg3Zt, $A8WB0, $xXY5G); } } public static function delete($wg3Zt) { BizException::throwsIfEmpty('SiteUrlProvider.Error -> url empty', $wg3Zt); foreach (self::get() as $TlCN9) { $TlCN9->delete($wg3Zt); } } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Web\Controller; use ModStart\App\Web\Layout\WebPage; use ModStart\Field\AbstractField; use ModStart\Field\AutoRenderedFieldValue; use ModStart\Grid\Grid; use ModStart\Grid\GridFilter; use ModStart\Repository\Filter\RepositoryFilter; use Module\Member\Auth\MemberUser; use Module\Member\Support\MemberLoginCheck; class MemberMoneyController extends MemberFrameController implements MemberLoginCheck { private $api; public function __construct() { parent::__construct(); $this->api = app(\Module\Member\Api\Controller\MemberMoneyController::class); } public function index(WebPage $ngjDL) { goto sz_To; ID1ph: $ti3W8->useSimple(function (AbstractField $JsHEv, $LKQ89, $F_9c4) { return AutoRenderedFieldValue::makeView('module::Member.View.pc.memberMoney.item', array('item' => $LKQ89)); }); goto MwEXZ; lf2Qs: $ti3W8->gridFilter(function (GridFilter $UGzyw) { $UGzyw->range('created_at', '时间')->datetime(); }); goto ztdXd; r4T1E: return $ngjDL->pageTitle('钱包')->view($CKKqq)->body($ti3W8)->handleGrid($ti3W8); goto FdLd1; MwEXZ: list($CKKqq, $RAErU) = $this->viewPaths('memberMoney.index'); goto r4T1E; Z8IDJ: $ti3W8->repositoryFilter(function (RepositoryFilter $UGzyw) { $UGzyw->where(array('memberUserId' => MemberUser::id())); }); goto lf2Qs; sz_To: $ti3W8 = Grid::make('member_money_log'); goto Z8IDJ; ztdXd: $ti3W8->disableCUD()->disableItemOperate(); goto ID1ph; FdLd1: } }

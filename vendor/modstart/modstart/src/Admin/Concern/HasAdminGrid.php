@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Admin\Concern; use ModStart\Admin\Layout\AdminDialogPage; use ModStart\Admin\Layout\AdminPage; use ModStart\Core\Input\Request; use ModStart\Core\Util\CRUDUtil; use ModStart\Grid\Grid; trait HasAdminGrid { public $registerGridClass = null; public $gridPageLayout = 'default'; public $gridPageUrlParam = array(); private function computeTitleGrid($TLRjn, $HkwcW) { $KVymd = $TLRjn ? $TLRjn . ' ' . L($HkwcW) : L($HkwcW); return isset($this->pageTitle) ? $this->pageTitle : $KVymd; } public function useGridDialogPage() { $this->gridPageLayout = 'dialog'; } public function setGridPageUrlParam($b4Sjf) { $this->gridPageUrlParam = $b4Sjf; } public function index() { goto UndDP; RY46V: $b4Sjf = array_merge($this->gridPageUrlParam, $S2MB4->scopeParam()); goto S0tbI; S0tbI: CRUDUtil::registerGridResource($S2MB4, $this->registerGridClass ? $this->registerGridClass : '\\' . __CLASS__, $b4Sjf); goto vxTzS; nm2Rn: $S2MB4 = $this->grid(); goto RY46V; dzuqH: return $poRy8->pageTitle($zVE7m)->body($S2MB4); goto iBNb1; xfdmt: $zVE7m = $S2MB4->title(); goto bm8Xl; vxTzS: if (Request::isPost()) { return $S2MB4->request(); } goto xfdmt; UndDP: switch ($this->gridPageLayout) { case 'dialog': $poRy8 = app(AdminDialogPage::class); break; default: $poRy8 = app(AdminPage::class); break; } goto nm2Rn; bm8Xl: if (null === $zVE7m) { $zVE7m = $this->computeTitleGrid($S2MB4->title(), 'List'); } goto dzuqH; iBNb1: } }

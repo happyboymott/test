@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Widget; class ButtonLink extends AbstractWidget { public static function getAssets() { return array('style' => ''); } public static function make(...$Rb1XH) { goto YqKEc; EhHZT: $Kwpw4->text($Rb1XH[1]); goto TyjCa; y8TDd: $Kwpw4->type($Rb1XH[0]); goto EhHZT; YqKEc: $Kwpw4 = new static(); goto y8TDd; qcSCp: return $Kwpw4; goto Pjgw3; TyjCa: $Kwpw4->url($Rb1XH[2]); goto qcSCp; Pjgw3: } public static function __callStatic($KtHB2, $Rb1XH) { goto LqF3P; w6Oy_: if (in_array($KtHB2, $HrJQR)) { goto wXtab; WWcR4: $Kwpw4->type($KtHB2); goto rTisS; WYnYm: $Kwpw4->url($Rb1XH[1]); goto z8ceo; wXtab: $Kwpw4 = new static(); goto WWcR4; z8ceo: $Kwpw4->disabled(empty($Rb1XH[2]) ? false : true); goto tbNNU; tbNNU: return $Kwpw4; goto yl6ZV; rTisS: $Kwpw4->text($Rb1XH[0]); goto WYnYm; yl6ZV: } goto dDJse; LqF3P: $HrJQR = array('muted', 'warning', 'danger', 'success', 'primary'); goto w6Oy_; dDJse: throw new \Exception('ButtonAjaxRequest error ' . join(',', $HrJQR) . ' '); goto y8pNn; y8pNn: } public function render() { if ($this->disabled) { return '<a href="javascript:;" ' . ($this->blank ? 'target="_blank"' : '') . ' class="btn btn-' . $this->type . '" ' . $this->attr . '>' . $this->text . '</a>'; } else { return '<a href="' . $this->url . '" ' . ($this->blank ? 'target="_blank"' : '') . ' class="btn btn-' . $this->type . '" ' . $this->attr . '>' . $this->text . '</a>'; } } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Data; use ModStart\Core\Util\PathUtil; abstract class AbstractRemoteDataStorage extends AbstractDataStorage { protected $remoteType = ''; public function driverName() { return $this->remoteType; } public function domain() { return modstart_config()->getWithEnv($this->remoteType . '_Domain'); } public function domainInternal() { return modstart_config()->getWithEnv($this->remoteType . '_DomainInternal', modstart_config()->getWithEnv($this->remoteType . '_Domain')); } public function updateDriverDomain($fb7yT) { goto t6TCB; t6TCB: $AQ9vT = array('driver' => $this->remoteType, 'domain' => $this->domain()); goto NGxVf; bMRGp: return array_merge($fb7yT, $AQ9vT); goto g6pVL; NGxVf: $this->repository->updateData($fb7yT['id'], $AQ9vT); goto bMRGp; g6pVL: } public function getDriverFullPath($am_Sn) { goto tNdPN; tNdPN: $am_Sn = parent::getDriverFullPath($am_Sn); goto CSWBk; dkbSt: return $this->domain() . $am_Sn; goto Q08xf; CSWBk: if (PathUtil::isPublicNetPath($am_Sn)) { return $am_Sn; } goto dkbSt; Q08xf: } public function getDriverFullPathInternal($am_Sn) { goto XtHfM; XtHfM: $am_Sn = parent::getDriverFullPath($am_Sn); goto k02rX; Bf3Qq: return $this->domainInternal() . $am_Sn; goto M2G0T; k02rX: if (PathUtil::isPublicNetPath($am_Sn)) { return $am_Sn; } goto Bf3Qq; M2G0T: } }

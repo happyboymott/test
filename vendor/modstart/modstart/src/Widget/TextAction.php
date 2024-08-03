@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Widget; use ModStart\ModStart; class TextAction extends AbstractWidget { public static function getAssets() { return array('style' => '.ub-text-action{display:inline-block;margin-right:0.5rem;}'); } public static function __callStatic($KtHB2, $Rb1XH) { goto x10ot; x10ot: $HrJQR = array('primary', 'muted', 'warning', 'danger', 'success'); goto msWwN; SDeCV: throw new \Exception('TextAction error ' . join(',', $HrJQR) . ' '); goto qj88S; msWwN: if (in_array($KtHB2, $HrJQR)) { goto AQ1On; vPn5x: $Kwpw4->attr(empty($Rb1XH[1]) ? '' : $Rb1XH[1]); goto xPNnZ; xPNnZ: return $Kwpw4->render(); goto Zzchw; x3xMH: $Kwpw4->type($KtHB2); goto M_qSl; AQ1On: $Kwpw4 = new static(); goto x3xMH; M_qSl: $Kwpw4->text($Rb1XH[0]); goto vPn5x; Zzchw: } goto SDeCV; qj88S: } public function render() { if ($this->disabled) { return '<a href="javascript:;" class="ub-text-action ub-text-muted">' . $this->text . '</span>'; } else { return '<a href="javascript:;" class="ub-text-action ub-text-' . ($this->type == 'primary' ? '' : $this->type) . '" ' . $this->attr . '>' . $this->text . '</span>'; } } }

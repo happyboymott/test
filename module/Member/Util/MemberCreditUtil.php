@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Util; use ModStart\Core\Dao\ModelUtil; class MemberCreditUtil { public static function paginateLog($mdCxN, $ngjDL, $c2jtx, $lHoRU = array()) { goto sM3dO; sM3dO: $lHoRU['where']['memberUserId'] = $mdCxN; goto n9a7O; n9a7O: $lHoRU['order'] = array('id', 'desc'); goto p6YzB; p6YzB: return ModelUtil::paginate('member_credit_log', $ngjDL, $c2jtx, $lHoRU); goto gmmi0; gmmi0: } public static function getTotal($mdCxN) { goto lDx5U; FaU1i: return $eFCO4['total']; goto tXsdG; N1yA2: if (empty($eFCO4)) { return 0; } goto FaU1i; lDx5U: $eFCO4 = ModelUtil::get('member_credit', array('memberUserId' => $mdCxN)); goto N1yA2; tXsdG: } public static function change($mdCxN, $tzkfm, $jqXlD) { goto aBq8r; sWgu6: ModelUtil::update('member_credit', array('id' => $eFCO4['id']), array('total' => $eFCO4['total'] + $tzkfm)); goto qjUBr; aBq8r: if (!$tzkfm) { throw new \Exception('MemberCreditUtil -> change empty'); } goto eCoib; QEwUf: ModelUtil::insert('member_credit_log', array('memberUserId' => $mdCxN, 'change' => $tzkfm, 'remark' => $jqXlD)); goto sWgu6; KnzbW: if (empty($eFCO4)) { $eFCO4 = ModelUtil::insert('member_credit', array('memberUserId' => $mdCxN, 'total' => 0)); } goto t9NRl; eCoib: $eFCO4 = ModelUtil::getWithLock('member_credit', array('memberUserId' => $mdCxN)); goto KnzbW; t9NRl: if ($tzkfm < 0 && $eFCO4['total'] + $tzkfm < 0) { throw new \Exception('MemberCreditUtil -> total change to empty'); } goto QEwUf; qjUBr: } }

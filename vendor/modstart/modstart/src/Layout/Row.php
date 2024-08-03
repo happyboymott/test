@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Layout; use Illuminate\Contracts\Support\Renderable; class Row implements Buildable, Renderable { protected $columns = array(); protected $class = array(); public function __construct($FQQRK = '') { if (!empty($FQQRK)) { if ($FQQRK instanceof \Closure) { call_user_func($FQQRK, $this); } else { $this->column(12, $FQQRK); } } } public function column($ju53S, $FQQRK) { goto mn0Ux; XZTxu: $Qyuvp = new Column($FQQRK, $ju53S); goto hPUFu; mn0Ux: $ju53S = $ju53S < 1 ? round(12 * $ju53S) : $ju53S; goto XZTxu; hPUFu: $this->addColumn($Qyuvp); goto HthR9; HthR9: } protected function addColumn(Column $Qyuvp) { $this->columns[] = $Qyuvp; } public function build() { goto XILRW; XILRW: $this->startRow(); goto Cy9hY; Cy9hY: foreach ($this->columns as $Qyuvp) { $Qyuvp->build(); } goto c91n5; c91n5: $this->endRow(); goto zi5OQ; zi5OQ: } protected function startRow() { goto e5XH7; kdhpw: echo '<div class="' . implode(' ', $NZAQB) . '">'; goto y_Dvz; e5XH7: $NZAQB = $this->class; goto alfZm; alfZm: $NZAQB[] = 'row'; goto kdhpw; y_Dvz: } protected function endRow() { echo '</div>'; } public function render() { goto xUyRx; jjY10: ob_end_clean(); goto LzZ0G; gs6jm: $this->build(); goto L3UsQ; L3UsQ: $N2d5J = ob_get_contents(); goto jjY10; xUyRx: ob_start(); goto gs6jm; LzZ0G: return $N2d5J; goto CoOyC; CoOyC: } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Provider\Notifier; use Module\Vendor\Util\NoneLoginOperateUtil; class NotifierProvider { public static function all() { goto Y5Gra; gKaHJ: return $jawiJ; goto L1am3; Y5Gra: static $jawiJ = null; goto yDvVn; yDvVn: if (null === $jawiJ) { goto lvY5V; lvY5V: $U9iSV = config('NotifierProviders'); goto i3Cc7; Aokxu: $jawiJ = array_map(function ($lTmSz) { return app($lTmSz); }, array_unique($U9iSV)); goto QQ2Ns; i3Cc7: if (empty($U9iSV)) { $U9iSV = array(DefaultNotifierProvider::class); } goto Aokxu; QQ2Ns: } goto gKaHJ; L1am3: } public static function notify($strQF, $A8WB0, $ZtuBh, $xXY5G = array()) { foreach (self::all() as $TlCN9) { $TlCN9->notify($strQF, $A8WB0, $ZtuBh, $xXY5G); } } public static function notifyNoneLoginOperateProcessUrl($strQF, $A8WB0, $ZtuBh, $kpSOw, $xXY5G = array()) { goto SW1zR; g9GsO: self::notify($strQF, $A8WB0, $ZtuBh, array_merge($xXY5G, $QKJuQ)); goto vBzeG; j3Jnu: if ($kpSOw) { $QAdhp = NoneLoginOperateUtil::generateUrl($kpSOw, $xXY5G, $QKJuQ['domainUrl']); $QKJuQ['processUrl'] = $QAdhp; } goto g9GsO; NVNim: foreach ($QKJuQ as $PPiLF => $SNE7X) { if (isset($xXY5G[$PPiLF])) { $QKJuQ[$PPiLF] = $xXY5G[$PPiLF]; unset($xXY5G[$PPiLF]); } } goto j3Jnu; SW1zR: $QKJuQ = array('domainUrl' => null, 'viewUrl' => null); goto NVNim; vBzeG: } }

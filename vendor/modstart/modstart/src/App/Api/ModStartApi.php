@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\App\Api; use Illuminate\Support\Facades\Cache; use Illuminate\Support\Facades\Route; use ModStart\Module\ModuleManager; class ModStartApi { private static function listModuleRoutes() { goto kYAnE; G_DVZ: return $oehQn; goto lUeMw; rvPHH: foreach ($Nr8WY as $ig6Rp) { if (file_exists($itoQ0 = ModuleManager::path($ig6Rp, 'Api/routes.php'))) { $oehQn[$ig6Rp] = $itoQ0; } } goto G_DVZ; wINUn: $oehQn = array(); goto rvPHH; kYAnE: $Nr8WY = ModuleManager::listAllInstalledModulesInRequiredOrder(true); goto wINUn; lUeMw: } public static function registerModuleRoutes() { goto WNOIL; WNOIL: if (config('env.APP_DEBUG')) { $NAKUU = self::listModuleRoutes(); } else { $NAKUU = Cache::rememberForever('ModStartApiRoutes', function () { return self::listModuleRoutes(); }); } goto TSoTQ; TSoTQ: foreach ($NAKUU as $ig6Rp => $itoQ0) { Route::group(array('prefix' => config('modstart.api.prefix'), 'middleware' => array('api.bootstrap', 'api.session'), 'namespace' => "\\Module\\{$ig6Rp}\\Api\\Controller"), function ($router) use($itoQ0) { if (file_exists($itoQ0)) { require $itoQ0; } }); } goto iznjS; iznjS: if (file_exists($EifDN = modstart_api_path('routes.php'))) { require $EifDN; } goto KmzAZ; KmzAZ: } }

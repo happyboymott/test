@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Api\Controller; use Illuminate\Routing\Controller; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Exception\BizException; use ModStart\Core\Input\InputPackage; use Module\Member\Auth\MemberUser; use Module\Member\Core\MemberMoneyChargePayCenterBiz; use Module\Member\Support\MemberLoginCheck; use Module\PayCenter\Support\PayCenterPerform; use Module\Vendor\Type\OrderStatus; class MemberMoneyChargeController extends Controller implements MemberLoginCheck { public function submit() { goto TGfyC; UCTPt: return $VpxWr->performSubmitOrder(MemberMoneyChargePayCenterBiz::NAME, $WFr7l['id'], $WFr7l['money'], '钱包充值'); goto bQRf5; bCZIF: $TYUE8 = $QBv2Z->getDecimal('money'); goto Z9huL; TGfyC: BizException::throwsIf('钱包充值未开启', !modstart_config('Member_MoneyChargeEnable', false)); goto ZaAZo; f6WYY: BizException::throwsIf('请安装 PayCenter 模块', !modstart_module_enabled('PayCenter')); goto t1d4O; ZaAZo: $QBv2Z = InputPackage::buildFromInput(); goto bCZIF; WnPAO: $WFr7l = ModelUtil::insert('member_money_charge_order', array('status' => OrderStatus::WAIT_PAY, 'memberUserId' => MemberUser::id(), 'money' => $TYUE8)); goto f6WYY; aFQRx: BizException::throwsIf('金额最大为1,000,000元', $TYUE8 > 1000000); goto WnPAO; Z9huL: BizException::throwsIf('金额最少为0.01元', $TYUE8 < 0.01); goto aFQRx; t1d4O: $VpxWr = app(PayCenterPerform::class); goto UCTPt; bQRf5: } }

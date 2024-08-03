@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Field; use ModStart\Core\Exception\BizException; use ModStart\Core\Util\SerializeUtil; class JsonIdItems extends AbstractField { const ITEM_STYLE_TITLE = 'title'; const ITEM_STYLE_COVER_TITLE = 'coverTitle'; protected function setup() { $this->addVariables(array('itemStyle' => self::ITEM_STYLE_TITLE, 'selectUrl' => modstart_admin_url('path/to/select'), 'previewUrl' => modstart_admin_url('path/to/preview'))); } public function itemStyle($R7kqa) { $this->addVariables(array('itemStyle' => $R7kqa)); return $this; } public function selectUrl($R7kqa) { $this->addVariables(array('selectUrl' => $R7kqa)); return $this; } public function previewUrl($R7kqa) { $this->addVariables(array('previewUrl' => $R7kqa)); return $this; } public function unserializeValue($R7kqa, AbstractField $Nmpi_) { if (null === $R7kqa) { return $R7kqa; } return @json_decode($R7kqa, true); } public function serializeValue($R7kqa, $p6TQ_) { return SerializeUtil::jsonEncode($R7kqa); } public function prepareInput($R7kqa, $p6TQ_) { goto Y_eja; x7Ta0: BizException::throwsIf($this->label . ' ' . L('Json Format Error'), $R7kqa && null === $JUfvF); goto WlcKo; Y_eja: $JUfvF = @json_decode($R7kqa, true); goto x7Ta0; WlcKo: return $JUfvF; goto Cv9W7; Cv9W7: } }

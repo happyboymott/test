@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Api\Controller; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Response; use ModStart\Module\ModuleBaseController; use Module\Member\Auth\MemberUser; use Module\Member\Support\MemberLoginCheck; use Module\Member\Util\MemberMoneyUtil; class MemberMoneyController extends ModuleBaseController implements MemberLoginCheck { public function get() { return Response::generateSuccessData(array('total' => MemberMoneyUtil::getTotal(MemberUser::id()))); } public function log() { goto DIZGM; eXdkH: $QpTyz = MemberMoneyUtil::paginateLog(MemberUser::id(), $QBv2Z->getPage(), $QBv2Z->getPageSize(), $lHoRU); goto zNcAK; cw7md: $lHoRU = array(); goto UaF9l; DIZGM: $QBv2Z = InputPackage::buildFromInput(); goto cw7md; wHqiP: switch ($INRHE) { case 'income': $lHoRU['whereOperate'] = array('change', '>', '0'); break; case 'payout': $lHoRU['whereOperate'] = array('change', '<', '0'); break; } goto eXdkH; UaF9l: $a5MQ2 = $QBv2Z->getSearchInput(); goto YsGQS; YsGQS: $INRHE = $a5MQ2->getTrimString('type'); goto wHqiP; zNcAK: return Response::generateSuccessPaginate($QBv2Z->getPage(), $QBv2Z->getPageSize(), $QpTyz); goto jdnDH; jdnDH: } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Middleware; use ModStart\Core\Exception\BizException; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Request; use ModStart\Core\Util\TimeUtil; use Module\Vendor\Util\NoneLoginOperateUtil; class NoneLoginOperateAuthMiddleware { public function handle($Gr0TX, \Closure $VM3zl) { goto PAKVk; iLFiZ: BizException::throwsIf('sign错误', $kuI6K != $dPwGJ); goto E0znG; aHRGj: BizException::throwsIf('已超时效（操作时间显示为24小时内，timestamp=' . time() . '）', !($qLVyf <= time() && $qLVyf > time() - TimeUtil::PERIOD_DAY)); goto tsjup; KKFij: BizException::throwsIfEmpty('sign为空', $kuI6K); goto iCFJy; PAKVk: $QBv2Z = InputPackage::buildFromInput(); goto uXfea; FpjbB: BizException::throwsIfEmpty('nonce为空', $t6dnv); goto KKFij; jo1_4: $kuI6K = $QBv2Z->getTrimString('sign'); goto FpjbB; iCFJy: $dPwGJ = NoneLoginOperateUtil::sign(Request::path(), $t6dnv, $qLVyf, $QBv2Z->getTrimString('param')); goto iLFiZ; E0znG: return $VM3zl($Gr0TX); goto MweZN; tsjup: $t6dnv = $QBv2Z->getTrimString('nonce'); goto jo1_4; uXfea: $qLVyf = $QBv2Z->getInteger('timestamp'); goto aHRGj; MweZN: } }

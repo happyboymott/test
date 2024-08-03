@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Command; use Illuminate\Console\Command; use ModStart\Core\Dao\ModelUtil; abstract class BaseDumpDemoDataCommand extends Command { protected $signature = 'dump-demo-data'; protected function buildInsert() { goto De2dJ; WY5Gf: foreach ($qV7SQ as $jzg7M) { if (is_array($jzg7M)) { goto sg6sV; sg6sV: $lFdfs[$jzg7M[0]] = ModelUtil::all($jzg7M[0], array(), $jzg7M[1]); goto y4rdI; i4qiF: if ($yyRc9) { $lFdfs[$jzg7M[0]] = array_filter($lFdfs[$jzg7M[0]], $yyRc9); } goto DxqsA; y4rdI: $yyRc9 = isset($jzg7M[2]) ? $jzg7M[2] : null; goto i4qiF; DxqsA: } else { $lFdfs[$jzg7M] = ModelUtil::all($jzg7M); } } goto qi4l6; S4zUy: $qV7SQ = func_get_args(); goto WY5Gf; De2dJ: $lFdfs = array(); goto S4zUy; qi4l6: return $lFdfs; goto ojG_d; ojG_d: } protected function buildUpdate() { goto OrDa5; OrDa5: $icz0L = func_get_args(); goto upHhh; bj24w: foreach ($icz0L as $HAzwL) { $tvFWX[] = array('table' => $HAzwL[0], 'where' => $HAzwL[1], 'update' => ModelUtil::get($HAzwL[0], $HAzwL[1], $HAzwL[2])); } goto BVwOw; BVwOw: return $tvFWX; goto FfAIw; upHhh: $tvFWX = array(); goto bj24w; FfAIw: } protected function buildDump($IE3H4) { goto bxxal; fwDTw: file_put_contents($GmsVq = public_path('data_demo/data.php'), '<' . '?php return ' . var_export($IE3H4, true) . ';'); goto h5GN9; h5GN9: $this->info("dump success -> {$GmsVq}"); goto KWlOG; bxxal: @mkdir(public_path('data_demo')); goto fwDTw; KWlOG: } public abstract function handle(); }

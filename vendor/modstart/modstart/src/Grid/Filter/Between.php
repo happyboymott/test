@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Grid\Filter; use ModStart\Core\Util\SerializeUtil; class Between extends AbstractFilter { protected $view = null; public function formatId($Qyuvp) { $RAJ0N = str_replace('.', '_', $Qyuvp); return array('start' => "{$RAJ0N}_start", 'end' => "{$RAJ0N}_end"); } protected function formatName($Qyuvp) { goto vmJnj; vmJnj: $UpuXl = explode('.', $Qyuvp); goto uT6N5; uT6N5: if (count($UpuXl) == 1) { $KtHB2 = $UpuXl[0]; } else { $KtHB2 = array_shift($UpuXl); foreach ($UpuXl as $Qyuvp) { $KtHB2 .= "[{$Qyuvp}]"; } } goto HjzFg; HjzFg: return array('start' => "{$KtHB2}[start]", 'end' => "{$KtHB2}[end]"); goto vfQbL; vfQbL: } public function datetime($UvCfk = array()) { $this->view = 'admin::filter.betweenDatetime'; $this->prepareForDatetime($UvCfk); } protected function prepareForDatetime($UvCfk = array()) { goto aFYp_; kZ4Xx: $UvCfk['locale'] = array_get($UvCfk, 'locale', config('app.locale')); goto E0KaX; aFYp_: $UvCfk['format'] = array_get($UvCfk, 'format', 'YYYY-MM-DD HH:mm:ss'); goto kZ4Xx; E0KaX: $MQPyk = SerializeUtil::jsonEncode($UvCfk); goto bZ0kq; bZ0kq: $yxjj8 = SerializeUtil::jsonEncode($UvCfk + array('useCurrent' => false)); goto Gi7O4; Gi7O4: } public function render() { if (isset($this->view)) { return view($this->view, $this->variables()); } return parent::render(); } }

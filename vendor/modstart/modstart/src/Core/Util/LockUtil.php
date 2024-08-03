@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; use NinjaMutex\Lock\MySqlLock; use NinjaMutex\MutexFabric; class LockUtil { static $instance = null; private static function instance() { if (null === self::$instance) { goto SiTts; m7Epg: $ge3kq = new MutexFabric('mysql', $deUMH); goto qhCLL; SiTts: $deUMH = new MySqlLock(config('env.DB_USERNAME'), config('env.DB_PASSWORD'), config('env.DB_HOST')); goto m7Epg; qhCLL: self::$instance = $ge3kq; goto atIKX; atIKX: } return self::$instance; } public static function acquire($KtHB2, $Ci5Ls = 60) { if (RedisUtil::isEnable()) { goto rXxYe; VuXTB: if ($cnfFN < time()) { RedisUtil::delete($QmpAx); return self::acquire($KtHB2, $Ci5Ls); } goto CVgPE; Hvy0p: if (RedisUtil::setnx($QmpAx, time() + $Ci5Ls)) { RedisUtil::expire($QmpAx, $Ci5Ls); return true; } goto Xbc7N; CVgPE: return false; goto FtVmr; rXxYe: $QmpAx = "Lock:{$KtHB2}"; goto Hvy0p; Xbc7N: $cnfFN = RedisUtil::get($QmpAx); goto VuXTB; FtVmr: } else { if (self::instance()->get($KtHB2)->acquireLock($Ci5Ls)) { return true; } } return false; } public static function release($KtHB2) { if (RedisUtil::isEnable()) { $QmpAx = "Lock:{$KtHB2}"; RedisUtil::delete($QmpAx); } else { self::instance()->get($KtHB2)->releaseLock(); } } }

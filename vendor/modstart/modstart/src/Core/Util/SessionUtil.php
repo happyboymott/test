@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; use Illuminate\Support\Facades\Session; class SessionUtil { public static function id() { return Session::getId(); } private static function getDataFromSession($ukHZQ) { goto EQTHM; SYTif: if (!is_array($fb7yT)) { $fb7yT = array(); } goto gl_96; gl_96: return $fb7yT; goto bd5Fo; EQTHM: $l_vSR = Session::getHandler()->read($ukHZQ); goto dkdFI; dkdFI: $fb7yT = @unserialize($l_vSR); goto SYTif; bd5Fo: } private static function saveDataToSession($ukHZQ, $fb7yT) { $l_vSR = serialize($fb7yT); Session::getHandler()->write($ukHZQ, $l_vSR); } public static function get($ukHZQ, $QmpAx) { $fb7yT = self::getDataFromSession($ukHZQ); return isset($fb7yT[$QmpAx]) ? $fb7yT[$QmpAx] : null; } public static function put($ukHZQ, $QmpAx, $R7kqa) { goto oCtFl; eUj9H: $fb7yT[$QmpAx] = $R7kqa; goto Fijhy; Fijhy: self::saveDataToSession($ukHZQ, $fb7yT); goto dm0Yn; oCtFl: $fb7yT = self::getDataFromSession($ukHZQ); goto eUj9H; dm0Yn: } public static function forget($ukHZQ, $QmpAx) { goto Hrud8; Hrud8: $fb7yT = self::getDataFromSession($ukHZQ); goto NOL7E; Vze1c: self::saveDataToSession($ukHZQ, $fb7yT); goto jmXPN; NOL7E: unset($fb7yT[$QmpAx]); goto Vze1c; jmXPN: } public static function clear($ukHZQ) { self::saveDataToSession($ukHZQ, array()); } }

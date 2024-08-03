@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Admin\Concern\HasAdminQuickCRUD; use ModStart\Admin\Layout\AdminCRUDBuilder; use ModStart\Form\Form; use ModStart\Grid\GridFilter; use ModStart\Support\Concern\HasFields; use Module\Member\Util\MemberGroupUtil; class MemberGroupController extends Controller { use HasAdminQuickCRUD; protected function crud(AdminCRUDBuilder $UXxZR) { $UXxZR->init('member_group')->field(function ($UXxZR) { $UXxZR->id('id', 'ID')->editable(true)->addable(true); $UXxZR->text('title', '名称'); $UXxZR->text('description', '描述'); $UXxZR->switch('isDefault', '默认')->optionsYesNo()->help(''); $UXxZR->switch('showFront', '前台显示')->optionsYesNo()->help(''); $UXxZR->display('created_at', L('Created At'))->listable(false); $UXxZR->display('updated_at', L('Updated At'))->listable(false); })->gridFilter(function (GridFilter $UGzyw) { $UGzyw->like('title', '名称'); })->enablePagination(false)->defaultOrder(array('id', 'asc'))->canSort(true)->title('用户分组')->dialogSizeSmall()->hookSaved(function (Form $GtTXi) { MemberGroupUtil::clearCache(); }); $UXxZR->repository()->setSortColumn('id'); } }

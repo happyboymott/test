@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Widget\Field; use ModStart\Field\AbstractField; use ModStart\Field\Text; use ModStart\Field\Type\FieldRenderMode; use Module\Member\Util\MemberCmsUtil; class AdminMemberInfo extends Text { protected $view = 'modstart::core.field.text'; protected $editable = false; protected function setup() { parent::setup(); $this->addVariables(array('memberFieldName' => null, 'formAsDisplay' => null)); } public function memberFieldName($SNE7X) { $this->addVariables(array('memberFieldName' => $SNE7X)); return $this; } public function formAsDisplay($SNE7X) { $this->addVariables(array('formAsDisplay' => $SNE7X)); return $this; } public function renderView(AbstractField $JsHEv, $LKQ89, $F_9c4 = 0) { switch ($JsHEv->renderMode()) { case FieldRenderMode::GRID: case FieldRenderMode::DETAIL: $this->renderAsDisplay(); break; case FieldRenderMode::FORM: if ($this->getVariable('formAsDisplay')) { $this->renderAsDisplay(); } break; } return parent::renderView($JsHEv, $LKQ89, $F_9c4); } private function renderAsDisplay() { $this->hookRendering(function (AbstractField $JsHEv, $LKQ89, $F_9c4) { $R51V2 = $JsHEv->column(); return MemberCmsUtil::showFromId($LKQ89->{$R51V2}, $this->getVariable('memberFieldName')); }); } }

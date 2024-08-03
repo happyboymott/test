@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Core\Util; class IdUtil { public static function generate($lLzcM = 'Default') { goto kHaVX; kHaVX: static $sJVAj = array(); goto VxYJB; DLQAs: return $lLzcM . '_' . $sJVAj[$lLzcM]; goto qF2CY; VxYJB: if (empty($sJVAj[$lLzcM])) { $sJVAj[$lLzcM] = 0; } goto jVeep; jVeep: $sJVAj[$lLzcM]++; goto DLQAs; qF2CY: } public static function next64BitId() { return intval(microtime(true) * 10000) . getmypid() % 10 . sprintf('%04d', rand(0, 9999)); } public static function next64BitIdSeq($UVkxQ = null) { goto XFtg1; B5O9H: if (null === $ZkyyF) { $ZkyyF = rand(0, 9); } goto VikWN; mAm1n: if ($UVkxQ === null) { $UVkxQ = getmypid(); } goto qXWE3; lBk5u: static $ZkyyF = null; goto LgY7O; LgY7O: do { $Tz1nO = intval(microtime(true) * 10000); if ($Tz1nO !== $Vxm3L) { $Ey0OB = 0; } } while ($Ey0OB >= 1000); goto D_D_T; VikWN: return $Tz1nO . $w3l3S . $ZkyyF . sprintf('%03d', $Ey0OB++); goto LBG66; qXWE3: $w3l3S = $UVkxQ % 10; goto B5O9H; z4wE9: static $Ey0OB = 0; goto lBk5u; XFtg1: static $Vxm3L = null; goto z4wE9; D_D_T: $Vxm3L = $Tz1nO; goto mAm1n; LBG66: } public static function generateSN() { return date('YmdHis', time()) . sprintf('%05d', rand(0, 99999)); } }

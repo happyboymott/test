@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace ModStart\Widget; use ModStart\ModStart; class ButtonAjaxRequest extends AbstractWidget { public static function getAssets() { return array('style' => '.ub-button-ajax-request{display:inline-block;}'); } public static function __callStatic($KtHB2, $Rb1XH) { goto KSmyX; FuU9w: throw new \Exception('ButtonAjaxRequest error ' . join(',', $HrJQR) . ' '); goto Y2yrA; qOjBY: if (in_array($KtHB2, $HrJQR)) { goto xoE1Q; WCoZX: $Kwpw4->text($Rb1XH[0]); goto ovU48; LTiXA: return $Kwpw4->render(); goto ot4O9; aEcie: $Kwpw4->disabled(empty($Rb1XH[3]) ? false : true); goto LTiXA; ovU48: $Kwpw4->url($Rb1XH[1]); goto xfDrY; yp5w1: $Kwpw4->type($KtHB2); goto WCoZX; xoE1Q: $Kwpw4 = new static(); goto yp5w1; xfDrY: $Kwpw4->confirm(empty($Rb1XH[2]) ? '' : $Rb1XH[2]); goto aEcie; ot4O9: } goto FuU9w; KSmyX: $HrJQR = array('muted', 'warning', 'danger', 'success', 'primary'); goto qOjBY; Y2yrA: } public function render() { if ($this->disabled) { return '<a href="javascript:;" class="btn ub-button-ajax-request btn-' . $this->type . '">' . $this->text . '</a>'; } else { return '<a href="javascript:;" ' . ($this->confirm ? 'data-confirm="' . $this->confirm . '"' : '') . ' data-ajax-request-loading data-ajax-request="' . $this->url . '" class="btn ub-button-ajax-request btn-' . $this->type . '">' . $this->text . '</a>'; } } }

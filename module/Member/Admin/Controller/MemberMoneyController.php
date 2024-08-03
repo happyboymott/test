@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Admin\Auth\AdminPermission; use ModStart\Admin\Layout\AdminDialogPage; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Response; use ModStart\Core\Util\CRUDUtil; use ModStart\Form\Form; use Module\Member\Util\MemberMoneyUtil; class MemberMoneyController extends Controller { public static $PermitMethodMap = array('*' => '\\Module\\Member\\Admin\\Controller\\MemberController@index'); public function charge(AdminDialogPage $ngjDL) { goto vq_Dz; TS3OQ: $GtTXi->decimal('change', '金额')->help('负数表示减少')->required(); goto BTInI; vq_Dz: $mdCxN = InputPackage::buildFromInput()->getInteger('memberUserId'); goto OshMZ; Oo39O: $GtTXi->showSubmit(false)->showReset(false); goto m54eh; OshMZ: $GtTXi = Form::make(''); goto JGDcL; BTInI: $GtTXi->text('remark', '说明')->defaultValue('系统变更')->required(); goto Oo39O; JGDcL: $GtTXi->display('_total', '余额')->value(MemberMoneyUtil::getTotal($mdCxN))->addable(true); goto TS3OQ; m54eh: return $ngjDL->pageTitle('积分变更')->body($GtTXi)->handleForm($GtTXi, function (Form $GtTXi) use($mdCxN) { AdminPermission::demoCheck(); $IE3H4 = $GtTXi->dataForming(); ModelUtil::transactionBegin(); MemberMoneyUtil::change($mdCxN, $IE3H4['change'], $IE3H4['remark']); ModelUtil::transactionCommit(); return Response::redirect(CRUDUtil::jsDialogCloseAndParentRefresh()); }); goto Nxq08; Nxq08: } }

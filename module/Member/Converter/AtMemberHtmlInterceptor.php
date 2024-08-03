@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Converter; use ModStart\Core\Dao\ModelUtil; use Module\Vendor\Html\HtmlConverterInterceptor; class AtMemberHtmlInterceptor implements HtmlConverterInterceptor { public function convert($hXSz1) { goto Tt3Pb; xxNyg: if (empty($Qt9DM[1])) { return $hXSz1; } goto PuhBQ; D3Qhg: return $hXSz1; goto Is_sp; FW39t: foreach ($vMYCC as $AYOsl => $gKqNQ) { goto Kx2mG; Kx2mG: if (empty($pHWk9[$gKqNQ])) { continue; } goto e9Bz6; HEL7G: $hXSz1 = str_replace($AYOsl, '<a href="' . $QLs4r . '" target="_blank">@' . $pHWk9[$gKqNQ]['username'] . '</a>: ', $hXSz1); goto Iwj8U; e9Bz6: $QLs4r = str_replace('{id}', $pHWk9[$gKqNQ]['id'], '/member/{id}'); goto HEL7G; Iwj8U: } goto D3Qhg; Y3Stu: $pHWk9 = array(); goto NCAu3; NCAu3: foreach ($zES5H as $hz6q9) { $pHWk9[$hz6q9['username']] = $hz6q9; } goto FW39t; Tt3Pb: preg_match_all('/@(.*?):/', $hXSz1, $Qt9DM); goto xxNyg; PuhBQ: $vMYCC = array(); goto gCyv5; gCyv5: foreach ($Qt9DM[1] as $F_9c4 => $gKqNQ) { goto HIIkW; Poon7: $vMYCC[$Qt9DM[0][$F_9c4]] = $gKqNQ; goto hhgjI; CVOze: if (empty($gKqNQ)) { continue; } goto Poon7; HIIkW: $gKqNQ = trim($gKqNQ); goto CVOze; hhgjI: } goto mbwk0; mbwk0: if (empty($vMYCC)) { return $hXSz1; } goto Wmqhh; Wmqhh: $zES5H = ModelUtil::model('member_user')->whereIn('username', array_values($vMYCC))->get()->toArray(); goto JgjiZ; JgjiZ: if (empty($zES5H)) { return $hXSz1; } goto Y3Stu; Is_sp: } }

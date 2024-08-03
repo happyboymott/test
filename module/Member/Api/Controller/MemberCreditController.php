@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Member\Api\Controller; use ModStart\Core\Input\InputPackage; use ModStart\Core\Input\Response; use ModStart\Module\ModuleBaseController; use Module\Member\Auth\MemberUser; use Module\Member\Support\MemberLoginCheck; use Module\Member\Util\MemberCreditUtil; class MemberCreditController extends ModuleBaseController implements MemberLoginCheck { public function get() { return Response::generateSuccessData(array('total' => MemberCreditUtil::getTotal(MemberUser::id()))); } public function log() { goto rbzjD; rbzjD: $QBv2Z = InputPackage::buildFromInput(); goto fo4YD; fo4YD: $lHoRU = array(); goto yhBID; B1vlS: switch ($INRHE) { case 'income': $lHoRU['whereOperate'] = array('change', '>', '0'); break; case 'payout': $lHoRU['whereOperate'] = array('change', '<', '0'); break; } goto XrfQO; pxY1w: return Response::generateSuccessPaginate($QBv2Z->getPage(), $QBv2Z->getPageSize(), $QpTyz); goto WArKM; yhBID: $a5MQ2 = $QBv2Z->getJsonAsInput('search'); goto dpHOY; XrfQO: $QpTyz = MemberCreditUtil::paginateLog(MemberUser::id(), $QBv2Z->getPage(), $QBv2Z->getPageSize(), $lHoRU); goto pxY1w; dpHOY: $INRHE = $a5MQ2->getTrimString('type'); goto B1vlS; WArKM: } }

@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Vendor\Provider\ContentVerify; use Illuminate\Support\Facades\Log; use ModStart\Core\Input\Request; use ModStart\Core\Job\BaseJob; class ContentVerifyJob extends BaseJob { public $name; public $title; public $body; public $param; public static function createQuick($MXTsP, $wlXEl, $A8WB0, $Fdu0f = null) { self::create($MXTsP, array('id' => $wlXEl, 'viewUrl' => $Fdu0f), $A8WB0); } public static function create($MXTsP, $xXY5G, $A8WB0, $TwO0F = null) { goto DIgHw; akaj9: $rnvcV = new static(); goto m7t9J; fbk3q: $rnvcV->title = $A8WB0; goto oKJm_; oKJm_: $rnvcV->body = $TwO0F; goto wgtZW; wgtZW: app('Illuminate\\Contracts\\Bus\\Dispatcher')->dispatch($rnvcV); goto EIfQ1; DIgHw: if (!isset($xXY5G['domainUrl'])) { $xXY5G['domainUrl'] = Request::domainUrl(); } goto O6tZm; m7t9J: $rnvcV->name = $MXTsP; goto NBTfj; O6tZm: if (isset($xXY5G['viewUrl'])) { if (!preg_match('/^https?:\\/\\//', $xXY5G['viewUrl'])) { $xXY5G['viewUrl'] = $xXY5G['domainUrl'] . $xXY5G['viewUrl']; } } goto akaj9; NBTfj: $rnvcV->param = $xXY5G; goto fbk3q; EIfQ1: } public function handle() { goto xXSuX; xXSuX: $CjF8A = ContentVerifyBiz::getByName($this->name); goto nGHoU; nGHoU: if (empty($CjF8A)) { Log::info('Vendor.ContentVerifyJob.UnknownProvider - ' . $this->name); return; } goto vcp9m; vcp9m: $CjF8A->run($this->param, $this->title, $this->body); goto Eqq72; Eqq72: } }

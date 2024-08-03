@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Cinema\Admin\Controller; use Illuminate\Routing\Controller; use ModStart\Admin\Concern\HasAdminQuickCRUD; use ModStart\Admin\Layout\AdminCRUDBuilder; use ModStart\Form\Form; use ModStart\Grid\GridFilter; use ModStart\Support\Concern\HasFields; use Module\Cinema\Model\CinemaChannel; class CinemaChannelController extends Controller { use HasAdminQuickCRUD; protected function crud(AdminCRUDBuilder $UXxZR) { $UXxZR->init('cinema_channel')->field(function ($UXxZR) { $UXxZR->id('id', 'ID'); $UXxZR->text('title', '名称'); $UXxZR->icon('icon', '图标')->help('图标和图标图片只需要选择一个即可'); $UXxZR->image('cover', '图标')->help('图标和图标图片只需要选择一个即可'); $UXxZR->select('mainTagGroupId', '主标签分类')->optionModel('cinema_channel_tag_group', 'id', 'title'); $UXxZR->display('created_at', L('Created At'))->listable(false); $UXxZR->display('updated_at', L('Updated At'))->listable(false); })->defaultOrder(array('sort', 'asc'))->gridFilter(function (GridFilter $UGzyw) { $UGzyw->eq('id', L('ID')); $UGzyw->like('title', L('Title')); })->hookChanged(function (Form $GtTXi) { CinemaChannel::clearCache(); })->title('频道管理')->canSort(true); } }

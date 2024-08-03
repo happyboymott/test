@@ -1,0 +1,7 @@
+<?php
+/**
+ * ------------------------ 
+ *  版权所有  www.tecmz.com
+ *  商业版本请购买正版授权使用
+ * ------------------------
+*/ namespace Module\Cinema\Model; use Illuminate\Support\Facades\Cache; use ModStart\Core\Assets\AssetsUtil; use ModStart\Core\Dao\ModelUtil; use ModStart\Core\Util\TreeUtil; use Illuminate\Database\Eloquent\Model; class CinemaChannel extends Model { protected $table = 'cinema_channel'; public static function clearCache() { Cache::forget('CinemaChannels'); } public static function recordAll() { return Cache::rememberForever('CinemaChannels', function () { $mvkYF = ModelUtil::all('cinema_channel', array(), array('id', 'title', 'cover', 'icon', 'mainTagGroupId'), array('sort', 'asc')); AssetsUtil::fixfull($mvkYF, 'cover'); return $mvkYF; }); } public static function channelTree() { $OqQ02 = self::recordAll(); return TreeUtil::nodesToTree($OqQ02); } public static function recordGet($wlXEl) { foreach (self::recordAll() as $db3lI) { if ($db3lI['id'] == $wlXEl) { return $db3lI; } } return null; } public static function firstId() { foreach (self::recordAll() as $LKQ89) { return $LKQ89['id']; } return 0; } public static function map() { return array_build(self::recordAll(), function ($Tf8Ew, $LKQ89) { return array($LKQ89['id'], $LKQ89['title']); }); } }
